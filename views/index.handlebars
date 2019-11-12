@@ -1,0 +1,67 @@
+<div class="row">
+    <form action="/reg_numbers" method="POST">
+        <div class="col-12">
+            <input type="text" id="textTem" class="entryTem" name="regNum" value="">
+             </div>
+              <div class="col-12">
+            <button type="submit" class="clickedTem" name="addBtn">Add</button>
+       </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="error">{{message}}</div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <form action="/filter" method="POST">
+            <div id="radioTownTem">
+                <span>
+                    <input class="townRegTem" type="radio" name="radiobut" value="CK" class="TownTem" id="townTem">
+                    Malmesbury
+                </span>
+                <span>
+                    <input class="townRegTem" type="radio" name="radiobut" value="CY" class="TownTem" id="townTem">
+                    Bellville
+                </span>
+                <span>
+                    <input class="townRegTem" type="radio" name="radiobut" value="CA" class="TownTem" id="townTem">
+                    Cape Town
+                </span>
+                <span>
+                    <input class="townRegTem" type="radio" name="radiobut" value="" class="TownTem" id="townTem">
+                    Show All
+                </span>
+            </div>
+            <button type="submit" class="filterTem" name="showBtn" value="">Filter</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <ul class="displayTem">
+
+
+            {{#each registrationList}}
+            <li class="PlateTem">
+                {{this}}
+            </li>
+            {{/each}}
+
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <form action="/reset" method="POST">
+            <input type="submit" class="reset" name="resetReg" value="Reset">
+        </form>
+    </div>
+</div>
+</div>

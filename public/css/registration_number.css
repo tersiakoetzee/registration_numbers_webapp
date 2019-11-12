@@ -1,0 +1,96 @@
+
+body{
+    background-image:url(./sand.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}
+.townRegTem{
+    /* margin-left: 7em; */
+    justify-content: center;
+  
+}
+h2{
+    display: flex;
+    justify-content: center; 
+    color: black;  
+}
+.col-12{
+    display: flex;
+    justify-content: center;
+}
+.regInput{
+    justify-content: center;
+    border-radius:1em;
+    width:160px;
+}
+
+button{ 
+    justify-content: center;
+    margin: auto;
+    color: black;
+    height: 3em;
+    width: 5em;
+    border-radius: 0.5em;
+    background-color:darkslategrey;
+   
+}
+
+.error{
+    font-size: 1em;
+    color: firebrick;
+    font-size: 2em;
+}
+
+span{
+    font-size: 1.5em;
+    color: black;
+}
+.col-6{
+    float: left;
+}
+.PlateTem{
+    justify-content: center;
+    margin-right: 2em;
+    border: solid black 1.5px;
+    border-radius: 0.5em;
+    background-color: yellow;
+    padding: 2px;
+    list-style: none;
+    font-size: 1.5em;
+    float: left;
+    margin: 5px; 
+     
+}
+.filterTem{
+    margin-top: 2em;
+    margin-left: 19em;
+    border-radius: 0.5em;
+    height: 3em;
+    width: 5em;
+    background-color:darkslategrey;
+}
+.reset{
+    display: block;
+    height: 3em;
+    width: 5em;
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 15em;
+    font-size: 1em;
+    color: black;
+    border-radius: 0.5em;
+    background-color:darkslategrey;
+   
+  }
+  .townRegTem{
+    width:20px ;
+    height:20px
+  }
+  .entryTem{
+      margin-top: 3em;
+      height: 3em;
+  }
+  .clickedTem{
+      margin-top: 3em;
+  }

@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - v9.11.2
+services:
+  - postgresql
+  env:
+    - DATABASE_URL="postgresql://postgresql://codex:codex123@localhost/registrations";
+  before_script:
+  - psql -c 'create database registrations;' -U postgres
+  - psql -U postgres -d regs -a -f tables.sql
+
+  
