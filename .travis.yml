@@ -12,6 +12,7 @@ env:
 before_script:
   - psql -c 'create database registrations;' -U postgres
   - psql -U postgres -d registrations -a -f tables.sql
+  - psql -U postgres -d registrations -a -f populate.sql
 
 addons:
   apt:
