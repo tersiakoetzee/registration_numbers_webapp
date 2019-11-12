@@ -2,8 +2,6 @@
 module.exports = function (pool) {
 
     var errorMessage = "";
-    let registrationList = []
-
 
     async function setTownReg(isValidRegNumber) {
 
@@ -22,7 +20,7 @@ module.exports = function (pool) {
 
         if (!test1 && !test2 && !test3 && !test4) {
             errorMessage = "Please Enter A Valid Registration"
-            return
+            return false;
         }
 
 
@@ -36,23 +34,20 @@ module.exports = function (pool) {
                 let response = await pool.query('SELECT id FROM town WHERE tag = $1', [letters])
                 if (response.rowCount === 0) {
                     errorMessage = 'Please Enter A Valid Registration for the Selected Towns';
-                    return
-
+                    return false
                 } else {
                     // console.log(response);
                     var check = await pool.query('SELECT regnumber FROM regs WHERE regnumber  = $1', [storeReg])
-                    if (check.rows.length > 0) {
-                        return
-                    } else {
-                        registrationList.push(storeReg)
-                        var results = response.rows
-                        // console.log(results);
-
-                        var townId = results[0].id;
-
-                        await pool.query('insert into regs (regnumber, town_id)values ($1,$2)', [storeReg, townId])
-
+                    if (check.rowCount === 1) {
+                        errorMessage = 'This registration has already been entered'
+                        return false
                     }
+
+                    var results = response.rows
+                    var townId = results[0].id;
+                    await pool.query('insert into regs (regnumber, town_id)values ($1,$2)', [storeReg, townId])
+                    return true;
+
                 }
             }
         }
@@ -60,7 +55,13 @@ module.exports = function (pool) {
 
     async function getAllRegNumbers() {
 
-        return registrationList
+        let regList = await pool.query('SELECT regnumber FROM regs')
+        const regNumbers = [];
+        for (var i = 0; i < regList.rows.length; i++) {
+            regNumbers.push(regList.rows[i].regnumber);
+        }
+
+        return regNumbers;
 
     }
 

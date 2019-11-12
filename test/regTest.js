@@ -15,8 +15,8 @@ describe("The RegNumbers", function () {
         await pool.query('DELETE FROM regs;');
     })
 
-    describe("The setTownReg", function () {
-        it("should set the registration entered in the right format and return each row ", async function () {
+    describe("The setTownReg",async function () {
+        it ("should set the registration entered in the right format and return each row ", async function () {
             var registration = regFactory(pool);
 
             await registration.setTownReg("CY 12345");
@@ -31,15 +31,16 @@ describe("The RegNumbers", function () {
         it("should not be able to duplicate, a registration should only enter thr database once", async function () {
             var registration = regFactory(pool);
 
-            await registration.setTownReg("cl 45678");
-            await registration.setTownReg("cl 45678");
-            await registration.setTownReg("cl 45678");
-            var test = await registration.getAllRegNumbers()
-            assert.equal(0, test.length);
+            assert.equal(true, await registration.setTownReg("CK 45678"));
+            assert.equal(false, await registration.setTownReg("CK 45678"));
+            assert.equal(false, await registration.setTownReg("CK 45678"));
 
-
+            var regNumbers = await registration.getAllRegNumbers()
+            
+            assert.equal(1, regNumbers.length);
 
         });
+
         it("It should return  an error message when no registration number added", async function () {
 
             var registration = regFactory();
