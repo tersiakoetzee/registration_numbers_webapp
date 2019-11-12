@@ -59,7 +59,10 @@ describe("The RegNumbers", function () {
             assert.equal(results,'Please Enter A Valid Registration for the Selected Towns', await registration.errorReg());
         });
     })
-
+    
+    beforeEach(async () => {
+        await pool.query('DELETE FROM regs;');
+    })
     describe("The filterForTownRegNumbers", function () {
         it("It should return all registrations from the selected town", async function () {
 
