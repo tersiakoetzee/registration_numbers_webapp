@@ -3,6 +3,7 @@ module.exports = function (pool) {
 
     var errorMessage = "";
 
+
     async function setTownReg(isValidRegNumber) {
 
         var rex = /[A-Za-z]{2}\s[0-9]{3}\s[0-9]{3}$/;
@@ -23,9 +24,7 @@ module.exports = function (pool) {
             return false;
         }
 
-
         if (isValidRegNumber) {
-
             const storeReg = isValidRegNumber.toUpperCase();
 
             if (isValidRegNumber) {
@@ -36,7 +35,6 @@ module.exports = function (pool) {
                     errorMessage = 'Please Enter A Valid Registration for the Selected Towns';
                     return false
                 } else {
-                    // console.log(response);
                     var check = await pool.query('SELECT regnumber FROM regs WHERE regnumber  = $1', [storeReg])
                     if (check.rowCount === 1) {
                         errorMessage = 'This registration has already been entered'
@@ -60,17 +58,13 @@ module.exports = function (pool) {
         for (var i = 0; i < regList.rows.length; i++) {
             regNumbers.push(regList.rows[i].regnumber);
         }
-
         return regNumbers;
-
     }
 
     async function filterForTownRegNumbers(loc) {
         var filteredList = []
 
-
         if (loc !== '') {
-
             let filter = getAllRegNumbers()
             filter = await pool.query('SELECT regs.regnumber,town.tag FROM regs INNER JOIN town ON regs.town_id = town.id')
             filter = filter.rows
@@ -84,7 +78,7 @@ module.exports = function (pool) {
             }
             return filteredList
         } else {
-            return registrationList
+            return getAllRegNumbers()
         }
     }
     function errorReg() {

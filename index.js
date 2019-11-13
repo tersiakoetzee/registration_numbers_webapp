@@ -5,7 +5,6 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const RegNumbers = require('./registration_number');
 
-
 const pg = require("pg");
 const Pool = pg.Pool;
 
@@ -49,14 +48,12 @@ app.get('/', async function (req, res) {
 
 
 app.post('/reg_numbers', async function (req, res) {
-    if (req.body.regNum === "" || req.body.regNum  === undefined) {
+    if (req.body.regNum === "" || req.body.regNum === undefined) {
         req.flash('error', 'test')
     };
 
     await registration.setTownReg(req.body.regNum)
-    
-    console.log(registration.errorReg());
-    
+
     req.flash('error', registration.errorReg())
 
     res.render('index', {
@@ -88,4 +85,4 @@ const PORT = process.env.PORT || 8007;
 app.listen(PORT, function () {
     console.log('start' + PORT);
 });
-//boiling-plains-30926.herokuapp.com
+//heroku.com/nameless-reef-36717.
