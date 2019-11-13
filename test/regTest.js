@@ -82,6 +82,40 @@ describe("The RegNumbers", function () {
             assert.deepEqual(filter, ["CA 123 456", "CA 324 567"])
 
         });
+        it("It should return all registrations from the selected town", async function () {
+
+            var registration = regFactory(pool);
+
+            await registration.setTownReg("CA 123 456");
+            await registration.setTownReg("CA 324 567");
+            await registration.setTownReg("CY 123 243");
+            await registration.setTownReg("CK 123 456");
+
+            let test = registration.getAllRegNumbers()
+            assert.equal(test.rows)
+            let loc = 'CK'
+
+            let filter = await registration.filterForTownRegNumbers(loc)
+            assert.deepEqual(filter, ["CK 123 456"])
+
+        });
+        it("It should return all registrations from the selected town", async function () {
+
+            var registration = regFactory(pool);
+
+            await registration.setTownReg("CA 123 456");
+            await registration.setTownReg("CA 324 567");
+            await registration.setTownReg("CY 123 243");
+            await registration.setTownReg("CK 123 456");
+
+            let test = registration.getAllRegNumbers()
+            assert.equal(test.rows)
+            let loc = 'CY'
+
+            let filter = await registration.filterForTownRegNumbers(loc)
+            assert.deepEqual(filter, ["CY 123 243"])
+
+        });
     })
 
 }) 
